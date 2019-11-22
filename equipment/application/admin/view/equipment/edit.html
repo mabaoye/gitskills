@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>修改网络设备</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+                {include file="common/header"}
+            	{include file="common/nav"}
+			</div>
+			<div class="col-md-4 column"></div>
+            <div class="col-md-4 column table-responsive" style="margin-top: 5px;min-height: 500px;">
+				<form method="post">
+					<table class="table table-bordered table-condensed table-responsive">
+						<caption>
+							<h3 style="text-align: center;">修改网络设备</h3>
+						</caption>
+						<tbody>
+							<tr>
+								<td>设备类型：</td>
+								<td>
+									<input type="text" class="form-control" id="equipment_type" name="equipment_type" value="{$equipment.equipment_type}">
+								</td>
+							</tr>
+							<tr>
+								<td>设备名称：</td>
+								<td>
+									<input type="text" class="form-control" id="equipment" name="equipment" value="{$equipment.equipment}">
+								</td>
+							</tr>
+							<tr>
+								<td>ip地址：</td>
+								<td>
+									<input type="text" class="form-control" id="ip" name="ip" value="{$equipment.ip}">
+								</td>
+							</tr>
+							<tr>
+								<td>社团名：</td>
+								<td>
+									<input type="text" class="form-control" id="community" name="community" value="{$equipment.community}">
+								</td>
+							</tr>
+							<tr>
+								<td>生产厂家：</td>
+								<td>
+									<input type="text" class="form-control" id="produce" name="produce" value="{$equipment.produce}">
+								</td>
+							</tr>
+							<tr>
+								<td>品牌</td>
+								<td>
+									<input type="text" class="form-control" id="brand" name="brand" value="{$equipment.brand}">
+								</td>
+							</tr>
+							<tr>
+								<td>型号：</td>
+								<td>
+									<input type="text" class="form-control" id="type" name="type" value="{$equipment.type}">
+								</td>
+							</tr>
+							<tr>
+								<td>备注：</td>
+								<td>
+									<input type="text" class="form-control" id="mark" name="mark" value="{$equipment.mark}">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: center;">
+									<input type="submit" class="btn" value="修改">
+									<a href="{:url('equipment')}">
+										<input type="button" class="btn" value="返回">
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="col-md-4 column"></div>
+			<div class="col-md-12 column">
+	            {include file="common/footer"}
+	        </div>
+	    </div>
+    </div>
+</body>
+</html>

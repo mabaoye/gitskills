@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>设备管理</title>
+	<style>
+		a { color:#ccc; text-decoration:none;}
+		a:hover { color:#f00;}
+	</style>
+</head>
+<body>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						详细信息
+					</h4>
+				</div>
+				<div id="we" class="modal-body">
+					<div>
+					    <table class="table" style="margin-top: 10px;">
+					        <tr>
+					            <td>
+					                设备名称:
+					            </td>
+					            <td>路由器1</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                状态:
+					            </td>
+					            <td>报警</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                索引号:
+					            </td>
+					            <td>182</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                接口类型:
+					            </td>
+					            <td>FE</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                不能通过任何数据包的状态:
+					            </td>
+					            <td>正常</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                能通过任何数据包的状态:
+					            </td>
+					            <td>正常</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                端口状态:
+					            </td>
+					            <td>正常</td>
+					        </tr>
+					        <tr>
+					            <td>
+					                发送总字节数:
+					            </td>
+					            <td>1518</td>
+					        </tr>
+				        	<tr>
+				            	<td>
+				                	接收总字节数:
+				           	 	</td>
+				            	<td>1510</td>
+				        	</tr>
+				        	<tr>
+				           	 	<td>
+				                	辅助信息:
+				            	</td>
+				            	<td></td>
+				        	</tr>
+				    	</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info center-block" data-dismiss="modal">确定
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<div class="panel panel-default">
+		<div class="row clearfix">
+			<div class="col-xs-12 column">
+                {include file="common/header"}
+				{include file="common/nav"}
+			</div>
+			<div class="col-xs-2 column" style="background-color: #003b72;">
+				<ul class="nav nav-pills nav-stacked">
+					<li>
+						<a href="../../admin/Topology/topology.html">
+							<img src="__STATIC__/img/topology.png">
+							&nbsp;网络拓补图
+						</a>
+					</li>
+					<li>
+						<a href="../../admin/prowl/prowl.html">
+							<img src="__STATIC__/img/prowl.png">
+							&nbsp;一键巡查
+						</a>
+					</li>
+					<li class="active">
+						<a href="equipment.html">
+							<img src="__STATIC__/img/equipment.png">
+							&nbsp;设备管理
+						</a>
+					</li>
+					<li>
+						<a href="../../admin/server/server.html">
+							<img src="__STATIC__/img/server.png">
+							&nbsp;服务器管理
+						</a>
+					</li>
+					<li>
+						<a href="../../admin/presentation/presentation.html">
+							<img src="__STATIC__/img/presentation.png">
+							&nbsp;报告管理
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="__STATIC__/img/safeExit.png">
+							&nbsp;安全退出
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-xs-10 column" style="margin-top: 10px;min-height: 100%;">
+				<form method="post">
+					<div>
+						<input type="text" id="keyword" name="keyword">
+						<button type="sumbit" value="查询">查询</button>
+					</div>
+				</form>
+				<table class="table" style="margin-top: 10px;">
+					<thead class="bg-success">
+						<tr>
+							<th>设备类型</th>
+							<th>设备名称</th>
+							<th>ip地址</th>
+							<th>社团名</th>
+							<th>生产厂家</th>
+							<th>品牌</th>
+							<th>型号</th>
+							<th>状态</th>
+							<th>详细</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					{volist id="equipment" name="equipments"}
+					<tbody>
+						<tr>
+							<td>{$equipment.equipment_type}</td>
+							<td>{$equipment.equipment}</td>
+							<td>{$equipment.ip}</td>
+							<td>{$equipment.community}</td>
+							<td>{$equipment.produce}</td>
+							<td>{$equipment.brand}</td>
+							<td>{$equipment.type}</td>
+							<td>{$equipment.progress}</td>
+							<td><a id="open" style="color: blue;" href="#">查看详情</a></td>
+							<td>
+								<a style="color: blue;" href="{:url('edit',['equipment_id'=>$equipment['equipment_id']])}">修改</a>
+								<a style="color: blue;" href="{:url('delete',['equipment_id'=>$equipment['equipment_id']])}" onclick="return confirm('确定要删除吗？');">删除</a>
+							</td>
+						</tr>
+						{/volist}
+						<tr>
+							<td colspan="10" style="text-align: right;">
+								<a style="color: blue;" href="{:url('add')}">添加</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-xs-12 column">
+                {include file="common/footer"}
+            </div>
+		</div>
+	</div>
+	<script>
+		 $(document).ready(function(){
+            $("#open").click(function(){
+                openIt(); 
+            })
+            function openIt()
+            {
+                $('#myModal').modal('show');
+                // $("#we").load("{:url('detailed')}"); 
+            }     
+        });
+    </script>
+</body>
+</html>
